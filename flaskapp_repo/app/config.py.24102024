@@ -1,0 +1,18 @@
+import os
+basedir = os.path.abspath(os.path.dirname(__file__))
+
+class Config(object):
+    SECRET_KEY = os.environ.get('SECRET_KEY') or 'do-or-do-not-there-is-no-try'
+
+    # Pulling MySQL connection details from environment variables
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
+	f"mysql+pymysql://{os.environ.get('DB_USER')}:{os.environ.get('DB_PASSWORD')}@{os.environ.get('DB_HOST')}/{os.environ.get('DB_NAME')}"
+
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+
+#class Config(object):
+#    SECRET_KEY = 'do-or-do-not-there-is-no-try'
+#    SECRET_KEY = os.environ.get('SECRET_KEY') or 'do-or-do-not-there-is-no-try'
+#    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or 'sqlite:///' + os.path.join(basedir, 'app.db')
+#    SQLALCHEMY_TRACK_MODIFICATIONS = False
